@@ -1,5 +1,7 @@
 <template>
     <div class="home">
+        <Header />
+
         <Wave />
 
         <div class="main">
@@ -36,11 +38,12 @@
 
 <script>
     import Wave from '../components/Wave'
+    import Header from '../components/Header'
 
     export default {
         name: 'index',
         components: {
-            Wave
+            Header,Wave
         },
         data () {
             return{
