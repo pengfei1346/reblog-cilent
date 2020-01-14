@@ -1,15 +1,26 @@
 <template>
     <div class="home">
-        <Header />
+        <Header class="header"/>
 
-        <Wave />
+        <div class="bg-box"></div>
 
-        <div class="main">
+        <div ref="main" class="main">
+            <div class="operate">
+                <div class="hello"></div>
+                <div class="header-top" @click="headerTopDown">
+                    <i class="iconfont icon-iconfonticonfonti2" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="wave">
+                <div id="banner_wave_1"></div>
+                <div id="banner_wave_2"></div>
+            </div>
 
             <ul class="article-list" v-for="(item,i) in arr">
                 <li class="article">
                     <div :class="i%2 === 0?'article-left':'article-right'">
-                        <img class="cover-img" :src="item.coverImgUrl">
+                        <img class="cover-img" data-src="a" :src="item.coverImgUrl">
                     </div>
                     <div class="border-shadow" :class="i%2 !== 0?'article-left':'article-right'">
                         <div class="detail-content">
@@ -37,13 +48,12 @@
 </template>
 
 <script>
-    import Wave from '../components/Wave'
-    import Header from '../components/Header'
+    import Header from '@/components/Header'
 
     export default {
         name: 'index',
-        components: {
-            Header,Wave
+        components:{
+            Header
         },
         data () {
             return{
@@ -66,21 +76,156 @@
                         abstract: 'gafsadadsa',
                         coverImgUrl: require('../assets/item-2.jpg')
                     },
+                    {
+                        publishTime: '2018-12-3 4:21:11',
+                        title: 'ga',
+                        heatNum: 13,
+                        commentNum: 546,
+                        author: 'ga',
+                        abstract: 'gafsadadsa',
+                        coverImgUrl: require('../assets/item-2.jpg')
+                    },
                 ]
             }
         },
         methods: {
-
+            headerTopDown() {
+                alert(12)
+                console.log(this.$refs.main.offsetTop);
+                window.scroll(0,this.$refs.main.offsetTop)
+                // let endScroll = document.getElementById('main').offset().top;
+            }
         }
     }
 </script>
 
 <style scoped lang="scss">
     .home{
-        text-align: center;
+        z-index: 0;
+        //  菜单栏
+        .header{
+            opacity: 0;
+            transition: all .5s linear;
+            &:hover{
+                opacity: 1;
+            }
+        }
+
+        //背景盒子
+        .bg-box{
+            z-index: 0;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            /*background-image: url("https://zouwang.vip/wp-content/themes/Sakura/cover/index.php");*/
+            background-image: url("../assets/bg.jpg");
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
         .main{
-            margin: 200px auto 0 auto;
+            position: absolute;
+            top: 100vh;
+            left: 0;
+            right: 0;
+            background: #fff;
+            z-index: 120;
+            /*margin: 100vh auto 0 auto;*/
             min-width: 800px;
+            min-height: 100vh;
+            /**/
+            .operate{
+                z-index: 120;
+                position: absolute;
+                top: -50vh;
+                left: 50%;
+                transform: translateX(-50%);
+                height: calc(50vh - 70px);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                /*animation: topmove 2s infinite;*/
+                .header-top{
+                    cursor: pointer;
+                    z-index: 5;
+                    animation: topmove 1s infinite;
+                    i{
+                        font-size: 28px;
+                        color: #fff;
+                    }
+                }
+                @keyframes topmove {
+                    from {
+                        transform: translateY(0px);
+                    }
+                    to {
+                        transform: translateY(100px);
+                    }
+                    /*from {height: calc(50vh - 70px);}*/
+                    /*to {height: calc(50vh - 56px);}*/
+                }
+            }
+
+            /*波浪特效*/
+            .wave {
+                z-index: 20;
+                position: absolute;
+                top: -110px;
+                height: 110px;
+                width: 100%;
+                overflow: hidden;
+                transition: .4s ease all;
+                #banner_wave_1,
+                #banner_wave_2 {
+                    position: absolute;
+                    width: 200%;
+                    height: 100%;
+                    background-size: 50% 100%;
+                }
+                #banner_wave_1 {
+                    top: 30px;
+                    left: -100%;
+                    opacity: 1;
+                    animation: water-right 20s infinite linear;
+                    background: url(https://zouwang.vip/wp-content/uploads/2019/09/wave1.png) repeat-x;
+                }
+                #banner_wave_2 {
+                    top: 30px;
+                    left: 0;
+                    opacity: 1;
+                    animation: water-left 30s infinite linear;
+                    background: url(https://zouwang.vip/wp-content/uploads/2019/09/wave2.png) repeat-x;
+                }
+                @keyframes water-right {
+                    0% {
+                        transform: translateX(0) translateZ(0) scaleY(1)
+                    }
+                    50% {
+                        transform: translateX(25%) translateZ(0) scaleY(0.85)
+                    }
+                    100% {
+                        transform: translateX(50%) translateZ(0) scaleY(1)
+                    }
+                }
+                @keyframes water-left {
+                    from {
+                        transform: translate(0%, 0px);
+                    }
+                    to {
+                        transform: translate(-50%, 0px);
+                    }
+                }
+            }
+
+            //文章列表
             .article-list{
                 .article{
                     width: 780px;
