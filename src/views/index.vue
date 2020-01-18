@@ -17,10 +17,10 @@
                 <div id="banner_wave_2"></div>
             </div>
 
-            <ul class="article-list" v-for="(item,i) in arr">
+            <ul class="article-list" v-for="(item,i) in list">
                 <li class="article">
                     <div :class="i%2 === 0?'article-left':'article-right'">
-                        <img class="cover-img" data-src="a" :src="item.coverImgUrl">
+                        <img class="cover-img" data-src="a" :src="item.coverImgUrl" v-show="item.coverImgUrl">
                     </div>
                     <div class="border-shadow" :class="i%2 !== 0?'article-left':'article-right'">
                         <div class="detail-content">
@@ -85,15 +85,24 @@
                         abstract: 'gafsadadsa',
                         coverImgUrl: require('../assets/item-2.jpg')
                     },
-                ]
+                ],
+                list: [],
+                total: 0
             }
+        },
+        created() {
+          this.getArticleList()
         },
         methods: {
             headerTopDown() {
-                alert(12)
                 console.log(this.$refs.main.offsetTop);
                 window.scroll(0,this.$refs.main.offsetTop)
                 // let endScroll = document.getElementById('main').offset().top;
+            },
+            async getArticleList() {
+                const data = await this.$xhr.get('/articles')
+                this.list = data.data
+                this.total = data.data
             }
         }
     }
@@ -119,8 +128,8 @@
             right: 0;
             top: 0;
             bottom: 0;
-            /*background-image: url("https://zouwang.vip/wp-content/themes/Sakura/cover/index.php");*/
-            background-image: url("../assets/bg.jpg");
+            background-image: url("https://zouwang.vip/wp-content/themes/Sakura/cover/index.php");
+            /*background-image: url("../assets/bg.jpg");*/
             background-position: top center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -156,7 +165,7 @@
                 .header-top{
                     cursor: pointer;
                     z-index: 5;
-                    animation: topmove 1s infinite;
+                    animation: topmove 1.5s infinite alternate;
                     i{
                         font-size: 28px;
                         color: #fff;
@@ -167,7 +176,7 @@
                         transform: translateY(0px);
                     }
                     to {
-                        transform: translateY(100px);
+                        transform: translateY(10px);
                     }
                     /*from {height: calc(50vh - 70px);}*/
                     /*to {height: calc(50vh - 56px);}*/
