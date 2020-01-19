@@ -17,8 +17,8 @@
                 <div id="banner_wave_2"></div>
             </div>
 
-            <ul class="article-list" v-for="(item,i) in list">
-                <li class="article">
+            <ul class="article-list">
+                <li class="article" v-for="(item,i) in list" :key="i" @click="handleToDetail(item._id)">
                     <div class="article-left border-shadow" :class="i%2 !== 0?'left':'right'">
                         <div class="detail-content">
                             <div class="detail-publish"><i class="iconfont icon-shijian2"></i>{{item.publishTime | parseTime}}</div>
@@ -82,6 +82,15 @@
                 const data = await this.$xhr.get('/articles')
                 this.list = data.data
                 this.total = data.total
+            },
+            handleToDetail(id) {
+                if(!id) return
+                this.$router.push({
+                    path: '/articleDetail',
+                    query: {
+                        id: id
+                    }
+                })
             }
         }
     }
