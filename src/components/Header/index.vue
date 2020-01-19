@@ -7,6 +7,7 @@
         <router-link to=""><li :class="this.$route.path===5?'active':''">时间轴</li></router-link>
         <router-link to=""><li :class="this.$route.path===6?'active':''">留言</li></router-link>
         <router-link to=""><li :class="this.$route.path===7?'active':''">关于</li></router-link>
+        <router-link to="/write"><li :class="this.$route.path==='/write'?'active':''">写文章</li></router-link>
     </ul>
 </template>
 

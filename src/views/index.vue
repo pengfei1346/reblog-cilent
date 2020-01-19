@@ -19,26 +19,27 @@
 
             <ul class="article-list" v-for="(item,i) in list">
                 <li class="article">
-                    <div :class="i%2 === 0?'article-left':'article-right'">
-                        <img class="cover-img" data-src="a" :src="item.coverImgUrl" v-show="item.coverImgUrl">
-                    </div>
-                    <div class="border-shadow" :class="i%2 !== 0?'article-left':'article-right'">
+                    <div class="article-left border-shadow" :class="i%2 !== 0?'left':'right'">
                         <div class="detail-content">
-                            <div class="detail-publish">{{item.publishTime}}</div>
+                            <div class="detail-publish"><i class="iconfont icon-shijian2"></i>{{item.publishTime | parseTime}}</div>
                             <div class="detail-title">{{item.title}}</div>
                             <div class="detail-meta">
-                                <div>{{item.heatNum}}</div>
-                                <div>{{item.commentNum}}</div>
-                                <div>{{item.author}}</div>
+                                <div class="meta-box"><i class="iconfont icon-yanjing"></i>{{item.browseNum}}</div>
+                                <div class="meta-box"><i class="iconfont icon-huifu"></i>{{item.replyNum}}</div>
+                                <div class="meta-box"><i class="iconfont icon-zuozhe"></i>{{item.author}}</div>
                             </div>
                             <div class="detail-abstract">
-                                <p>摘要：{{item.abstract}}</p>
+                                <p>摘要：</p>
+                                <p style="text-indent: 2em">{{item.abstract}}</p>
                             </div>
                             <div class="detail-edit">
-                                <div>...</div>
+                                <div><i class="iconfont icon-shenglvehao"></i></div>
                                 <div>编辑</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="article-right" :class="i%2 === 0?'left':'right'">
+                        <img class="cover-img" data-src="a" :src="item.coverImgUrl" v-show="item.coverImgUrl">
                     </div>
                 </li>
             </ul>
@@ -57,35 +58,13 @@
         },
         data () {
             return{
-                arr:[
-                    {
-                        publishTime: '2018-12-3 4:21:11',
-                        title: '啊啊',
-                        heatNum: 33,
-                        commentNum: 56,
-                        author: '方法',
-                        abstract: '反反复复反反复复反反复复反反复复反反复复发发发',
-                        coverImgUrl: require('../assets/item-1.png')
-                    },
-                    {
-                        publishTime: '2018-12-3 4:21:11',
-                        title: 'ga',
-                        heatNum: 13,
-                        commentNum: 546,
-                        author: 'ga',
-                        abstract: 'gafsadadsa',
-                        coverImgUrl: require('../assets/item-2.jpg')
-                    },
-                    {
-                        publishTime: '2018-12-3 4:21:11',
-                        title: 'ga',
-                        heatNum: 13,
-                        commentNum: 546,
-                        author: 'ga',
-                        abstract: 'gafsadadsa',
-                        coverImgUrl: require('../assets/item-2.jpg')
-                    },
-                ],
+                // publishTime: '2018-12-3 4:21:11',
+                // title: '啊啊',
+                // heatNum: 33,
+                // commentNum: 56,
+                // author: '方法',
+                // abstract: '反反复复反反复复反反复复反反复复反反复复发发发',
+                // coverImgUrl: require('../assets/item-1.png')
                 list: [],
                 total: 0
             }
@@ -102,7 +81,7 @@
             async getArticleList() {
                 const data = await this.$xhr.get('/articles')
                 this.list = data.data
-                this.total = data.data
+                this.total = data.total
             }
         }
     }
@@ -237,23 +216,24 @@
             //文章列表
             .article-list{
                 .article{
-                    width: 780px;
+                    width: 800px;
                     height: 300px;
                     margin: 20px auto;
-                    border-radius: 10px;
                     display: flex;
+                    flex-flow:row;
+                    /*overflow: hidden;*/
                     .border-shadow{
                         box-shadow: 0 1px 20px -8px rgba(0, 0, 0, .5);
                     }
-                    .article-left{
+                    .left{
                         order: 1;
                         border-radius: 10px 0 0 10px;
                     }
-                    .article-right{
+                    .right{
                         order: 2;
                         border-radius: 0 10px 10px 0;
                     }
-                    .article-left,.article-right{
+                    .article-left{
                         flex: 1;
                         overflow: hidden;
                         position: relative;
@@ -266,7 +246,12 @@
                             transform: translateX(-50%);
                             .detail-publish{
                                 color: #888;
-                                font-size: 12px;
+                                font-size: 13px;
+                                display: flex;
+                                align-items: center;
+                                i{
+                                    margin-right: 6px;
+                                }
                             }
                             .detail-title{
                                 text-overflow: ellipsis;
@@ -278,17 +263,24 @@
                             }
                             .detail-meta{
                                 color: #888;
-                                font-size: 12px;
+                                font-size: 14px;
                                 display: flex;
                                 justify-content: space-around;
+                                .meta-box{
+                                    display: flex;
+                                    align-items: center;
+                                    i{
+                                        margin-right: 6px;
+                                    }
+                                }
                             }
                             .detail-abstract{
-                                font-size: 12px;
+                                font-size: 16px;
                                 width: 100%;
                                 color: rgba(0, 0, 0, .66);
-                                height: 67.5px;
+                                height: 104px;
                                 overflow: hidden;
-                                margin: 20px 0 40px;
+                                margin: 16px 0 30px;
                                 p{
                                     line-height: 25px;
                                 }
@@ -298,11 +290,29 @@
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
+                                color: #333;
+                                i{
+                                    color: #666;
+                                    font-size: 24px;
+                                }
+                                i:hover{
+                                    color: #ccc;
+                                }
                             }
                         }
+                    }
+                    .article-right{
+                        overflow: hidden;
+                        width: 429px;
+                        .cover-img:hover {
+                            transform: scale(1.1)
+                        }
                         .cover-img{
+                            /*429 300*/
                             width: 100%;
                             height: 100%;
+                            object-fit: cover;
+                            transition: all .6s
                         }
                     }
                 }

@@ -3,6 +3,18 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+//引入全局过滤器
+import * as filters from './filters' // global filters
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
+
+//引入prototypes
+import * as prototypes from './utils/prototypes' // global filters
+Object.keys(prototypes).forEach(key => {
+  Vue.prototype[key] = prototypes[key]
+})
+
 import request from './utils/request'
 Vue.prototype.$xhr = request
 
