@@ -86,10 +86,7 @@
             handleToDetail(id) {
                 if(!id) return
                 this.$router.push({
-                    path: '/articleDetail',
-                    query: {
-                        id: id
-                    }
+                    path: `/articles/${id}`
                 })
             }
         }

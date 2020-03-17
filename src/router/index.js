@@ -16,12 +16,12 @@ const routes = [
   {
     path: '/articles',
     name: 'articles',
-    component: () => import('../views/articles.vue')
+    component: () => import('../views/article/articles.vue')
   },
   {
-    path: '/articleDetail',
+    path: '/articles/:id',
     name: 'articleDetail',
-    component: () => import('../views/articleDetail.vue')
+    component: () => import('../views/article/articleDetail.vue')
   },
   {
     path: '/write',
