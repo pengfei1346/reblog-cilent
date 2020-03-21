@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="callClient">Call</button>
+</body>
+<script src="observer.js"></script>
+<script>
+    // 先实例化一个饭馆
+    const restaurant = new Subject()
+
+    // 实例化两个顾客 a 和 b
+    const a = new Observer()
+    const b = new Observer()
+
+    // 定义当前被叫号的顾客
+    let currentObserver
+
+    /**
+     * @desc a 顾客实现自己的更新方法
+     * @params restaurant 饭堂实例
+     */
+    a.update = function(restaurant) {
+        // 判断当前的叫号是不是自己
+        if (restaurant.observers.get(0) == a) {
+            console.log('我是a，我的饭好了')
+            // 如果是自己，把当前叫号的顾客赋值成自己
+            currentObserver = a
+        }
+    }
+
+
+</script>
+</html>

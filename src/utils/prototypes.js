@@ -8,3 +8,4 @@ export const $isJSON = function(str) {
     }
   }
 }
+

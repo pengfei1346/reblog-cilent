@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import './style/global.css'
+
 //引入全局过滤器
 import * as filters from './filters' // global filters
 Object.keys(filters).forEach(key => {

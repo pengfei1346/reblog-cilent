@@ -1,23 +1,24 @@
 <template>
     <div>
         <!-- 图片上传组件辅助-->
-        <el-upload
-                class="avatar-uploader"
-                :action="serverUrl"
-                name="pic"
-                :headers="header"
-                :show-file-list="false"
-                :on-success="uploadSuccess"
-                :on-error="uploadError"
-                :before-upload="beforeUpload">
-        </el-upload>
+        <!--<el-upload-->
+                <!--class="avatar-uploader"-->
+                <!--:action="serverUrl"-->
+                <!--name="pic"-->
+                <!--:headers="header"-->
+                <!--:show-file-list="false"-->
+                <!--:on-success="uploadSuccess"-->
+                <!--:on-error="uploadError"-->
+                <!--:before-upload="beforeUpload">-->
+        <!--</el-upload>-->
 
         <quill-editor
                 class="editor"
                 v-model="content"
                 ref="myQuillEditor"
                 :options="editorOption"
-                @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
+                @blur="onEditorBlur($event)"
+                @focus="onEditorFocus($event)"
                 @change="onEditorChange($event)">
         </quill-editor>
     </div>
@@ -47,30 +48,33 @@
     import "quill/dist/quill.bubble.css";
 
     export default {
+        name: '',
         props: {
             /*编辑器的内容*/
             value: {
                 type: String
             },
-            /*图片大小*/
-            maxSize: {
-                type: Number,
-                default: 4000 //kb
+            placeholder: {
+                default: ''
             }
         },
-
+        watch: {
+            value(val) {
+                if(!val) {
+                    this.content = ''
+                }
+            }
+        },
         components: {
             quillEditor
         },
-
         data() {
             return {
                 content: this.value,
-                quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
                 editorOption: {
-                    placeholder: "",
                     theme: "snow", // or 'bubble'
-                    placeholder: "您想说点什么？",
+                    placeholder: this.placeholder,
+                    quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
                     modules: {
                         toolbar: {
                             container: toolbarOptions,
@@ -153,8 +157,17 @@
 <style>
     .editor {
         line-height: normal !important;
+        width: 100%;
         height: 400px;
     }
+    .ql-toolbar.ql-snow{
+        display: none;
+    }
+    .ql-toolbar.ql-snow + .ql-container.ql-snow{
+        border: 1px solid #DCDFE6 !important;
+        border-radius: 4px;
+    }
+
     .ql-snow .ql-tooltip[data-mode=link]::before {
         content: "请输入链接地址:";
     }

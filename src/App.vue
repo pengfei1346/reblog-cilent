@@ -6,15 +6,11 @@
                 <Header/>
             </el-header>
 
-            <el-main style="padding: 0 !important;">
-                <!--<div class="wave">-->
-                    <!--<div id="banner_wave_1"></div>-->
-                    <!--<div id="banner_wave_2"></div>-->
-                <!--</div>-->
+            <main class="main-body">
                 <router-view/>
-            </el-main>
+            </main>
 
-            <el-footer style="background: #fff"></el-footer>
+            <!--<el-footer style="background: #fff"></el-footer>-->
         </el-container>
     </div>
 </template>
@@ -40,5 +36,10 @@
     }
     a{
         text-decoration: none;
+    }
+    .main-body {
+        min-height: calc(100vh - 60px);
+        width: 100%;
+        padding: 0 !important;
     }
 </style>

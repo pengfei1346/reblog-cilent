@@ -79,7 +79,7 @@
                 // let endScroll = document.getElementById('main').offset().top;
             },
             async getArticleList() {
-                const data = await this.$xhr.get('/articles')
+                const data = await this.$xhr.get('/article')
                 this.list = data.data
                 this.total = data.total
             },
@@ -222,6 +222,7 @@
             //文章列表
             .article-list{
                 .article{
+                    cursor: pointer;
                     width: 800px;
                     height: 300px;
                     margin: 20px auto;

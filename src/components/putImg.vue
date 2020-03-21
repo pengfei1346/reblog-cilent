@@ -1,48 +1,45 @@
 <template>
   <div class="put">
-    <!--//form提交-->
-    <!--<form action="http://localhost:3000/api/putImg" method="post" enctype="multipart/form-data">-->
-      <!--<input type="file" >-->
-      <!--<button>提交</button>-->
-    <!--</form>-->
     <label class="put-container">
-      <div id="add" v-show="!img">+</div>
-      <img :src="img" v-if="img">
-      <input type="file" @change="handlePut($event)">
+      <div id="add" v-show="!currentImg">
+        <img src="../assets/icon_upload.png">
+      </div>
+      <img :src="currentImg" v-if="currentImg">
+      <input type="file" @change="handlePut($event)" v-if="isEdit">
     </label>
 
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
-
   export default {
     name: "putImg",
     data() {
       return {
-        img: ""
+        currentImg: ''
+      }
+    },
+    props: {
+      img: {
+        type: String,
+        default: ''
+      },
+      isEdit: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
-      handlePut($event) {
-        console.log($event.target.files);
+      async handlePut($event) {
         let file = $event.target.files[0];
-
-        let form = new FormData();
-        form.append("pic", file)
-
-        axios.post(
-          '/api/putImg',
-          form,
-          {
-            headers: {'content-type': "multipart/form-data"}
-          }
-        ).then(res => {
-          console.log(res);
-          this.img=`/api/${res.data.data}`
-        })
-      },
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+          this.currentImg = e.target.result
+          this.$emit('fileLoad',e.target.result)
+        };
+        // this.currentImg = window.URL.createObjectURL(file)
+      }
     }
   }
 </script>
@@ -56,18 +53,15 @@
     font-weight: 100;
     display: block;
     color: #888;
-    margin: 20px auto;
-    border: 1px solid #888;
-    width: 50px;
-    height: 50px;
-    line-height: 44px;
+    width: 120px;
+    height: 120px;
     img{
-      width: 50px;
-      height: 50px;
+      width: 120px;
+      height: 120px;
     }
     #id{
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
     }
     input{
       display: none;

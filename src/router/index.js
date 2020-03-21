@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/articles',
     name: 'articles',
-    component: () => import('../views/article/articles.vue')
+    component: () => import('../views/article/articleList.vue')
   },
   {
     path: '/articles/:id',
@@ -25,7 +25,27 @@ const routes = [
   },
   {
     path: '/write',
-    component: () => import('../views/write.vue')
+    component: () => import('../views/write/index.vue')
+  },
+  {
+    path: '/timeline',
+    component: () => import('../views/timeLine')
+  },
+  {
+    path: '/archive',
+    component: () => import('../views/archive')
+  },
+  {
+    path: '/collections',
+    component: () => import('../views/collections')
+  },
+  {
+    path: '/leavingMessage',
+    component: () => import('../views/leavingMessage')
+  },
+  {
+    path: '/about',
+    component: () => import('../views/about')
   }
 ]
 
