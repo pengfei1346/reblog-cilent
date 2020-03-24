@@ -3,7 +3,7 @@
         <div class="article-top">
             <div class="top-container">
                 <div class="top-title">{{articleInfo.title}}</div>
-                <div class="top-info">{{articleInfo.author}} · {{articleInfo.publishTime | parseTime()}} · {{articleInfo.browseNum}} 次阅读</div>
+                <div class="top-info">{{articleInfo.author}} · {{articleInfo.createdAt | parseTime()}} · {{articleInfo.browseNum}} 次阅读</div>
             </div>
         </div>
 

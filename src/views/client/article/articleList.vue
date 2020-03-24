@@ -75,5 +75,5 @@
 </script>
 
 <style scoped lang="scss">
- @import "./style/articleList";
+ @import "style/articleList";
 </style>

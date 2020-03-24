@@ -21,7 +21,7 @@
                 <li class="article" v-for="(item,i) in list" :key="i" @click="handleToDetail(item._id)">
                     <div class="article-left border-shadow" :class="i%2 !== 0?'left':'right'">
                         <div class="detail-content">
-                            <div class="detail-publish"><i class="iconfont icon-shijian2"></i>{{item.publishTime | parseTime}}</div>
+                            <div class="detail-publish"><i class="iconfont icon-shijian2"></i>{{item.createdAt | parseTime}}</div>
                             <div class="detail-title">{{item.title}}</div>
                             <div class="detail-meta">
                                 <div class="meta-box"><i class="iconfont icon-yanjing"></i>{{item.browseNum}}</div>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="detail-edit">
                                 <div><i class="iconfont icon-shenglvehao"></i></div>
-                                <div>编辑</div>
+                                <!--<div>编辑</div>-->
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@
                     cursor: pointer;
                     width: 800px;
                     height: 300px;
-                    margin: 20px auto;
+                    margin: 40px auto;
                     display: flex;
                     flex-flow:row;
                     /*overflow: hidden;*/
@@ -294,9 +294,10 @@
                             }
                             .detail-edit{
                                 padding: 0 20px;
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
+                                text-align: right;
+                                /*display: flex;*/
+                                /*justify-content: space-between;*/
+                                /*align-items: center;*/
                                 color: #333;
                                 i{
                                     color: #666;

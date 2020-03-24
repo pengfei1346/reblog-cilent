@@ -1,18 +1,33 @@
 <template>
     <div>
-        <!--<Markdown :content.sync="content"></Markdown>-->
+        <div>
+            <el-input
+                    type="textarea"
+                    :rows="22"
+                    placeholder="请输入内容"
+                    resize="none"
+                    >
+            </el-input>
+        </div>
+        <!--<vue-markdown></vue-markdown>-->
     </div>
 </template>
+
 <script>
-    // import Markdown from 'vue-s-markdown/src/markdown/index'
+    import VueMarkdown from 'vue-markdown' // production
+
     export default {
-        components: {
-            // Markdown
-        },
+        name: 'app',
         data () {
             return {
-                content: ''
+                anchorAttrs: {
+                    target: '_blank',
+                    rel: 'noopener noreferrer nofollow'
+                }
             }
+        },
+        components: {
+            VueMarkdown
         }
     }
 </script>
