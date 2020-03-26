@@ -1,11 +1,13 @@
 const path = require('path')
+const isProduction = process.env.NODE_ENV === 'production';
 
 //项目打包分析
-const WebpackBundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const WebpackBundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 // yarn add compression-webpack-plugin --save-dev
 // // gzip
 // const CompressionWebpackPlugin = require('compression-webpack-plugin')
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // // 定义压缩文件类型
 // const productionGzipExtensions = ['js', 'css']
 
@@ -18,6 +20,20 @@ const env = process.env.NODE_ENV;
 const name = '管理系统'
 
 const port = process.env.port || process.env.npm_config_port || 8088 // dev port
+
+// cdn 配置
+const cdn = {
+  css: [
+      'https://unpkg.com/element-ui@2.3.7/lib/theme-chalk/index.css'
+  ],
+  js: [
+
+    'https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js',
+      'https://unpkg.com/vue-router@3.0.2/dist/vue-router.min.js',
+      'https://unpkg.com/vuex@3.1.0/dist/vuex.min.js',
+    'https://unpkg.com/element-ui@2.3.7/lib/index.js'
+  ]
+}
 
 module.exports = {
   publicPath: '/',
@@ -44,33 +60,78 @@ module.exports = {
       }
     }
   },
-  configureWebpack: {
-    name: name,
-    resolve: {
-      alias: {
-        '@': resolve('src')
+  // configureWebpack: {
+  //   name: name,
+  //   resolve: {
+  //     alias: {
+  //       '@': resolve('src')
+  //     }
+  //   },
+  //   //项目打包分析
+  //   // plugins: [new WebpackBundleAnalyzerPlugin()],
+  //   //element-ui  cdn
+  //   externals: {
+  //     'vue': 'Vue',
+  //     'vue-router': 'VueRouter',
+  //     'element-ui': 'ELEMENT'
+  //   },
+  //   // gzip 压缩
+  //   // plugins: [
+  //   //   new CompressionWebpackPlugin({
+  //   //     filename: '[path].gz[query]',
+  //   //     algorithm: 'gzip',
+  //   //     test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+  //   //     threshold: 10240,// 对超过10k的数据压缩
+  //   //     minRatio: 0.8,
+  //   //     deleteOriginalAssets: true // 不删除源文件
+  //   //   })
+  //   // ]
+  // },
+  configureWebpack: config => {
+    config.name = name
+    // 生产模式
+    if (isProduction) {
+      config.externals = {
+        'vue': 'Vue',
+        'vue-router': 'VueRouter',
+        'element-ui': 'ELEMENT'
       }
-    },
-    //项目打包分析
-    plugins: [new WebpackBundleAnalyzerPlugin()],
-    //element-ui  cdn
-    externals: {
-      'vue': 'Vue',
-      'element-ui': 'ELEMENT'
-    },
-    // gzip 压缩
-    // plugins: [
-    //   new CompressionWebpackPlugin({
-    //     filename: '[path].gz[query]',
-    //     algorithm: 'gzip',
-    //     test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-    //     threshold: 10240,// 对超过10k的数据压缩
-    //     minRatio: 0.8,
-    //     deleteOriginalAssets: true // 不删除源文件
-    //   })
-    // ]
+      // // 打包生产.gz包
+      // config.plugins.push(new CompressionWebpackPlugin({
+      //   algorithm: 'gzip',
+      //   test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+      //   threshold: 10240,
+      //   minRatio: 0.8
+      // }))
+      // // 添加自定义代码压缩配置
+      // config.plugins.push(
+      //     new UglifyJsPlugin({
+      //       uglifyOptions: {
+      //         compress: {
+      //           warnings: false,
+      //           drop_debugger: true,
+      //           drop_console: true,
+      //         },
+      //       },
+      //       sourceMap: false,
+      //       parallel: true,
+      //     })
+      // )
+    }
   },
   chainWebpack(config) {
+    // config.resolve.alias
+    //     .set('@', path.join(__dirname,'src'))
+    //     .set('components', path.join(__dirname,'src/components'))
+    //     .set('mixins', path.join(__dirname,'src/mixins'))
+    //     .set('store', path.join(__dirname,'src/store'))
+    if(isProduction) {
+      config.plugin('html')
+        .tap(args => {
+          args[0].cdn = cdn;
+          return args;
+        })
+    }
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
     // 压缩代码
