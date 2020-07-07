@@ -42,12 +42,6 @@ const routes = [
     {
         path: '/about',
         component: () => import('../views/client/about')
-    },
-
-    // admin page
-    {
-        path: '/admin/write',
-        component: () => import('../views/admin/write/index.vue')
     }
 ]
 

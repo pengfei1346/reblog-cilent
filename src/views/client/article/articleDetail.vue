@@ -8,16 +8,28 @@
         </div>
 
         <div class="article-body">
-            <div v-html="content"></div>
+            <mavon-editor
+                    class="md"
+                    :value="articleInfo.content"
+                    :subfield="prop.subfield"
+                    :defaultOpen="prop.defaultOpen"
+                    :toolbarsFlag="prop.toolbarsFlag"
+                    :editable="prop.editable"
+                    :scrollStyle="prop.scrollStyle"
+            />
         </div>
     </div>
 </template>
 
 <script>
-    import markdown from "@/utils/markdown";
+    import { mavonEditor } from 'mavon-editor'
+    import 'mavon-editor/dist/css/index.css'
 
     export default {
         name: "articleDetail",
+        components:{
+            mavonEditor
+        },
         data() {
             return {
                 articleInfo: {},
@@ -27,6 +39,17 @@
         computed: {
             id() {
                 return this.$route.params.id
+            },
+            // 解析器配置
+            prop () {
+                let data = {
+                    subfield: false,// 单双栏模式
+                    defaultOpen: 'preview',//edit： 默认展示编辑区域 ， preview： 默认展示预览区域
+                    editable: false,	// 是否允许编辑
+                    toolbarsFlag: false,
+                    scrollStyle: true
+                }
+                return data
             }
         },
         created() {
@@ -36,11 +59,6 @@
             async articleDetail() {
                 const data = await this.$xhr.get(`/article/${this.id}`)
                 this.articleInfo = data.data
-                const article = markdown.marked(data.data.content);
-                article.then((res) => {
-                    this.content = res.content;
-                    // this.articleDetail.toc = res.toc;
-                });
             },
         }
     }
