@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import articleDetail from'../views/client/article/articleDetail'
+
 const routes = [
     {
         path: '/',
@@ -21,7 +23,8 @@ const routes = [
     {
         path: '/articles/:id',
         name: 'articleDetail',
-        component: () => import('../views/client/article/articleDetail.vue')
+        // component: () => import('../views/client/article/articleDetail.vue')
+        component: articleDetail
     },
     {
         path: '/timeline',
