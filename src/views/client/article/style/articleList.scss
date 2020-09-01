@@ -1,4 +1,5 @@
 .home{
+  position: relative;
   z-index: 0;
   //  菜单栏
   .header{
@@ -14,6 +15,7 @@
     z-index: 120;
     min-width: 800px;
     min-height: 100vh;
+    //position: relative;
     /**/
     //文章列表
     .article-list {
@@ -21,6 +23,7 @@
       margin: 0 auto;
 
       li {
+        cursor: pointer;
         margin: 40px auto;
 
         .article-top {

@@ -3,6 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+//  特效
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
+
 import './style/global.css'
 
 //引入全局过滤器
