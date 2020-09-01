@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  var twoSum = function(nums, target) {
+    // //  遍历
+    // for(let i = 0; i<nums.length;i++) {
+    //   //  正确的数
+    //   let currentNum = target - nums[i]
+    //   const result = nums.indexOf(currentNum)
+    //   if( result !== -1 && i !== result) {
+    //     //  找到直接return
+    //     return [i,result]
+    //   }
+    // }
+
+    let prevNum = {}
+    //  遍历
+    for(let i = 0; i<nums.length;i++) {
+      const curNum = nums[i]
+      const currentNum = target - curNum
+      const index = prevNum[currentNum]
+      if(index !== undefined) {
+        return [index,i]
+      }
+      prevNum[curNum] = i
+    }
+  };
+
+  twoSum([2, 7, 11, 15],9)
+  // console.log();
+  // console.log(twoSum([2,2,7,11,15],9));
+</script>
+</html>
