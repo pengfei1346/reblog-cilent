@@ -12,7 +12,7 @@
                           :color="item.state === 1 ? 'green' : item.state === 3 ? 'red' : ''"
                           placement="top"
                           hide-timestamp>
-          <router-link :to="`/articleDetail?id=${item._id}`">
+          <router-link :to="`/articles/${item._id}`">
             <h3 class="title">{{item.title}}</h3>
           </router-link>
           <p>{{item.createdAt | parseTime}}</p>
