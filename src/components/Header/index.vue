@@ -8,22 +8,19 @@
     </router-link>
     <!--<router-link to=""><li :class="this.$route.path===3?'active':''">分类</li></router-link>-->
     <router-link to="/archive">
-      <li :class="this.$route.path==='/archive'?'active':''">分类</li>
+      <li :class="this.$route.path==='/archive'?'active':''">归档</li>
     </router-link>
     <router-link to="/collections">
       <li :class="this.$route.path==='/collections'?'active':''">收藏</li>
     </router-link>
-    <router-link to="/timeLine">
-      <li :class="this.$route.path==='/timeLine'?'active':''">时间轴</li>
-    </router-link>
+<!--    <router-link to="/timeLine">-->
+<!--      <li :class="this.$route.path==='/timeLine'?'active':''">时间轴</li>-->
+<!--    </router-link>-->
     <router-link to="/leavingMessage">
       <li :class="this.$route.path==='/leavingMessage'?'active':''">留言</li>
     </router-link>
     <router-link to="/about">
       <li :class="this.$route.path==='/about'?'active':''">关于</li>
-    </router-link>
-    <router-link to="/write">
-      <li :class="this.$route.path==='/write'?'active':''">写文章</li>
     </router-link>
   </ul>
 </template>

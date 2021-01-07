@@ -1,27 +1,28 @@
 <template>
     <div class="project left">
-        <el-row :gutter="20">
-            <el-col class="el-col-pointer"
-                    :span="isMobileOrPc ? 24 : 12"
-                    v-for="(l, index) in list"
-                    :key="l._id"
-                    style="margin-bottom: 20px">
-                <a :href="l.url"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    <el-card shadow="hover">
-                        <img :src="l.img"
-                             class="image">
-                        <div style="padding: 14px;">
-                            <h4>{{l.title}}</h4>
-                            <div class="content">{{l.content}}</div>
-                            <span>{{l.start_time | parseTime}}--</span>
-                            <span>{{l.end_time | parseTime}}</span>
-                        </div>
-                    </el-card>
-                </a>
-            </el-col>
-        </el-row>
+      <h1 style="text-align: center">建设中...</h1>
+<!--        <el-row :gutter="20">-->
+<!--            <el-col class="el-col-pointer"-->
+<!--                    :span="isMobileOrPc ? 24 : 12"-->
+<!--                    v-for="(l, index) in list"-->
+<!--                    :key="l._id"-->
+<!--                    style="margin-bottom: 20px">-->
+<!--                <a :href="l.url"-->
+<!--                   target="_blank"-->
+<!--                   rel="noopener noreferrer">-->
+<!--                    <el-card shadow="hover">-->
+<!--                        <img :src="l.img"-->
+<!--                             class="image">-->
+<!--                        <div style="padding: 14px;">-->
+<!--                            <h4>{{l.title}}</h4>-->
+<!--                            <div class="content">{{l.content}}</div>-->
+<!--                            <span>{{l.start_time | parseTime}}&#45;&#45;</span>-->
+<!--                            <span>{{l.end_time | parseTime}}</span>-->
+<!--                        </div>-->
+<!--                    </el-card>-->
+<!--                </a>-->
+<!--            </el-col>-->
+<!--        </el-row>-->
         <LoadingCustom v-if="isLoading"></LoadingCustom>
         <LoadEnd v-if="isLoadEnd"></LoadEnd>
     </div>
@@ -60,15 +61,14 @@
             }
         },
         mounted() {
-            this.handleSearch();
-            window.onscroll = () => {
-                if (getScrollTop() + getWindowHeight() > getDocumentHeight() - 100) {
-                    // 如果不是已经没有数据了，都可以继续滚动加载
-                    if (this.isLoadEnd === false && this.isLoading === false) {
-                        this.handleSearch();
-                    }
-                }
-            };
+            // this.handleSearch();
+            // window.onscroll = () => {
+            //     if (getScrollTop() + getWindowHeight() > getDocumentHeight() - 100) {
+                    // if (this.isLoadEnd === false && this.isLoading === false) {
+                    //     this.handleSearch();
+                    // }
+                // }
+            // };
         },
         methods: {
             async handleSearch() {

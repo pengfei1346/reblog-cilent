@@ -88,7 +88,7 @@
         return data
       }
     },
-    created() {
+    async created() {
       this.articleDetail()
     },
     methods: {
