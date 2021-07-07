@@ -51,7 +51,7 @@ module.exports = {
     proxy: {
       "/dev": {
         // target: 'http://localhost:3300',
-        target: 'http://62.234.90.11:3300',
+        target: 'http://112.124.56.117:3300',
         ws: true,
         changeOrigin: true,
         pathRewrite: {
