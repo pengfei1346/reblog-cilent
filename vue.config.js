@@ -19,7 +19,7 @@ const env = process.env.NODE_ENV;
 
 const name = '博客'
 
-const port = process.env.port || process.env.npm_config_port || 8088 // dev port
+const port = process.env.port || process.env.npm_config_port || 8100 // dev port
 
 // cdn 配置
 const cdn = {
