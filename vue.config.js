@@ -24,13 +24,13 @@ const port = process.env.port || process.env.npm_config_port || 8100 // dev port
 // cdn 配置
 const cdn = {
   css: [
-    'https://unpkg.com/element-ui@2.3.7/lib/theme-chalk/index.css'
+    'https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.1/theme-chalk/index.min.css'
   ],
   js: [
-    'https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js',
-    'https://unpkg.com/vue-router@3.0.2/dist/vue-router.min.js',
-    'https://unpkg.com/vuex@3.1.0/dist/vuex.min.js',
-    'https://unpkg.com/element-ui@2.3.7/lib/index.js'
+    'https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/vue-router/3.0.2/vue-router.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/vuex/3.1.0/vuex.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.1/index.min.js',
   ]
 }
 
@@ -51,7 +51,7 @@ module.exports = {
     proxy: {
       "/dev": {
         // target: 'http://localhost:3300',
-        target: 'http://62.234.90.11:3300',
+        target: 'http://112.124.56.117:3300',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

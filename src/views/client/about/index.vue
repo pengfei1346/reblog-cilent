@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <h1>This is an about page</h1>
+        <h1 style="text-align: center">建设中...</h1>
     </div>
 </template>
 
@@ -9,3 +9,10 @@
 
     }
 </script>
+
+<style scoped lang="scss">
+  .about {
+    padding: 40px 0;
+
+  }
+</style>

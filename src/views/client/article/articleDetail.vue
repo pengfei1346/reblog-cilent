@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="article-container">
     <div class="article-top">
       <div class="top-container">
         <div class="top-title">{{articleInfo.title}}</div>
@@ -38,8 +38,7 @@
             hoverMode="grab"
             :clickEffect="true"
             clickMode="push"
-    >
-    </vue-particles>
+    />
   </div>
 </template>
 
@@ -89,7 +88,7 @@
         return data
       }
     },
-    created() {
+    async created() {
       this.articleDetail()
     },
     methods: {
@@ -110,27 +109,31 @@
     bottom: 0;
     z-index: -9999;
   }
+  .article-container {
+    z-index: -100;
+    margin-bottom: 140px;
 
-  .article-top {
-    z-index: 100;
-    width: 100%;
-    padding-top: 40px;
+    .article-top {
+      width: 100%;
+      padding-top: 40px;
 
-    .top-container {
-      width: 70%;
-      margin: 30px auto;
+      .top-container {
+        width: 70%;
+        margin: 30px auto;
 
-      & > :first-child {
-        font-weight: bold;
-        font-size: 18px;
-        margin-bottom: 14px;
+        & > :first-child {
+          font-weight: bold;
+          font-size: 18px;
+          margin-bottom: 14px;
+        }
       }
     }
-  }
 
-  .article-body {
-    z-index: 100;
-    width: 70%;
-    margin: 0 auto;
+    .article-body {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    /deep/ .v-note-wrapper{ z-index:1 !important; }
   }
 </style>
